@@ -1,39 +1,10 @@
-pipeline {
-    agent ('master')
-    tools {
-        maven 'localMaven'
-        jdk 'localJDK'
-    }
+// Discard old builds
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '14', artifactNumToKeepStr: '10', daysToKeepStr: '14', numToKeepStr: '10'))])
 
-    stages {
-        stage ('Compile Stage') {
-
-            steps {
-                withMaven(maven : 'localMaven/bin') 
-                {
-                    sh 'mvn clean compile'
-                }
-            }
-        }
-
-        /*stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : '/var/jenkins_home/maven/apache-maven-3.5.3/bin/') 
-                {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : '/var/jenkins_home/maven/apache-maven-3.5.3/bin/') 
-                {
-                    sh 'mvn deploy'
-                }
-            }
-        }*/
+node('master') {
+    stage('Build'){
+        def mvnHome = tool 'localMaven'           // define which maven tool used
+        env.PATH = "${mvnHome}/bin:${env.PATH}"   // declare maven environment path
+        sh 'mvn clean package'                    // build
     }
 }

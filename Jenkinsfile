@@ -5,10 +5,8 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
-                //withMaven(maven : 'localMaven/bin') 
+                withMaven(maven : '/var/jenkins_home/maven/apache-maven-3.5.3/bin/') 
                 {
-                def mvnHome = tool 'localMaven'
-                env.PATH = "${mvnHome}/bin:${env.PATH}"
                     sh 'mvn clean compile'
                 }
             }
@@ -17,10 +15,8 @@ pipeline {
         stage ('Testing Stage') {
 
             steps {
-                //withMaven(maven : 'localMaven/bin') 
+                withMaven(maven : '/var/jenkins_home/maven/apache-maven-3.5.3/bin/') 
                 {
-                def mvnHome = tool 'localMaven'
-                env.PATH = "${mvnHome}/bin:${env.PATH}"
                     sh 'mvn test'
                 }
             }
@@ -29,10 +25,8 @@ pipeline {
 
         stage ('Deployment Stage') {
             steps {
-                //withMaven(maven : 'localMaven/bin') 
+                withMaven(maven : '/var/jenkins_home/maven/apache-maven-3.5.3/bin/') 
                 {
-                def mvnHome = tool 'localMaven'
-                env.PATH = "${mvnHome}/bin:${env.PATH}"
                     sh 'mvn deploy'
                 }
             }

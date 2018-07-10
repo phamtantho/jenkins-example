@@ -5,6 +5,6 @@ node('master') {
     stage('Build'){
         def mvnHome = tool 'localMaven'           // define which maven tool used
         env.PATH = "${mvnHome}/bin:${env.PATH}"   // declare maven environment path
-        sh 'mvn clean package'                    // build.
+        sh 'mvn clean compile'                    // build
     }
 }

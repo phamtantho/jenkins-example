@@ -3,8 +3,9 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '14', artifactNumTo
 
 node('master') {
     stage('Build'){
-        def mvnHome = tool 'localMaven'           // define which maven tool used
+        /*def mvnHome = tool 'localMaven'           // define which maven tool used
         env.PATH = "${mvnHome}/bin:${env.PATH}"   // declare maven environment path
-        sh 'mvn clean compile'                    // build
+        sh 'mvn clean compile'                    // build*/
+        echo 'Hello Tho'
     }
 }

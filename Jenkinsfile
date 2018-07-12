@@ -11,7 +11,4 @@ node('master') {
     stage ('Test') { 
         sh 'mvn test' 
     }
-    stage ('Deploy') { 
-        sh 'mvn deploy' 
-    }
 }

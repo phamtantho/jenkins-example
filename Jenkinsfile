@@ -1,8 +1,11 @@
 node { 
+    def mvnHome = tool name: 'localMaven'
+    env.PATH = "${mvnHome}/bin:${env.PATH}"
+    
     stage ('Checkout SCM') {
         checkout scm
     } 
     stage ('Build') { 
-        echo 'This is a minimal pipeline.' 
+        sh 'mvn clean compile' 
     }
 }

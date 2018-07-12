@@ -6,7 +6,7 @@ pipeline {
 
             steps {
                 withMaven(maven : 'localMaven') {
-                    sh 'mv clean compile'
+                    sh 'mv compile'
                 }
             }
         }

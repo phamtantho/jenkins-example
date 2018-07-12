@@ -1,4 +1,4 @@
-node { 
+node('master') { 
     def mvnHome = tool name: 'localMaven'
     env.PATH = "${mvnHome}/bin:${env.PATH}"
     
@@ -6,6 +6,7 @@ node {
         checkout scm
     } 
     stage ('Build') { 
-        sh 'mvn clean compile' 
+        //sh 'mvn clean compile' 
+        echo ''
     }
 }

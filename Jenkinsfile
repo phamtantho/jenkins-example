@@ -6,7 +6,6 @@ node('master') {
         checkout scm
     } 
     stage ('Build') { 
-        //sh 'mvn clean compile' 
-        echo ''
+        sh 'mvn clean compile' 
     }
 }

@@ -1,6 +1,6 @@
 node('master') { 
-    def mvnHome = tool name: 'localMaven'
-    env.PATH = "${mvnHome}/bin:${env.PATH}"
+    //def mvnHome = tool name: 'localMaven'
+    //env.PATH = "${mvnHome}/bin:${env.PATH}"
     
     stage ('Checkout SCM') {
         checkout scm

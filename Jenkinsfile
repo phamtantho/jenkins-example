@@ -1,11 +1,32 @@
-// Discard old builds
-properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '14', artifactNumToKeepStr: '10', daysToKeepStr: '14', numToKeepStr: '10'))])
+pipeline {
+    agent any
 
-node('master') {
-    stage('Build'){
-        /*def mvnHome = tool 'localMaven'           // define which maven tool used
-        env.PATH = "${mvnHome}/bin:${env.PATH}"   // declare maven environment path
-        sh 'mvn clean compile'                    // build*/
-        echo 'Hello Tho'
+    stages {
+        stage ('Compile Stage') {
+
+            steps {
+                withMaven(maven : 'localMaven') {
+                    sh 'mvn clean compile'
+                }
+            }
+        }
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(maven : 'localMaven') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+
+        stage ('Deployment Stage') {
+            steps {
+                withMaven(maven : 'localMaven') {
+                    sh 'mvn deploy'
+                }
+            }
+        }
     }
 }
